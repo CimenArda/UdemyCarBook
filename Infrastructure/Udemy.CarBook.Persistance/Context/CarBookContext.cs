@@ -29,7 +29,7 @@ namespace Udemy.CarBook.Persistance.Context
         public DbSet<FooterAddress> FooterAddresses { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Pricing> Pricings { get; set; }
-        public DbSet<Services> Services { get; set; }
+        public DbSet<Service> Services { get; set; }
         public DbSet<SocialMedia> socialMedias { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
 

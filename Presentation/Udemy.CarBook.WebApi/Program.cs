@@ -1,4 +1,3 @@
-
 using Udemy.CarBook.Persistance.Context;
 using Udemy.CarBook.Persistance.Repositories;
 using Udemy.CarBook.Persistance.Repositories.CarRepositories;
@@ -10,6 +9,7 @@ using UdemyCarBook.Application.Features.CQRS.Handlers.CategoryHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.ContactHandlers;
 using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
+using UdemyCarBook.Application.Services;
 using UdemyCarBook.Domain.Entities;
 
 namespace Udemy.CarBook.WebApi
@@ -67,6 +67,8 @@ namespace Udemy.CarBook.WebApi
             builder.Services.AddScoped<UpdateCarCommandHandler>();
             builder.Services.AddScoped<RemoveCarCommandHandler>();
 
+
+            builder.Services.AddApplicationSerive(builder.Configuration);
 
 
             builder.Services.AddControllers();

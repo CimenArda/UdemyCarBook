@@ -1,14 +1,15 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Domain.Entities
+namespace UdemyCarBook.Application.Features.MediatR.Commands.ServicesCommands
 {
-    public class Services
+    public class UpdateServicesCommand :IRequest
     {
-        public int ServicesID { get; set; }
+        public int ServiceID { get; set; }
 
         public string Title { get; set; }
 
