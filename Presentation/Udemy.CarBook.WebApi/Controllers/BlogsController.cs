@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UdemyCarBook.Application.Features.MediatR.Commands.BlogCommands;
+using UdemyCarBook.Application.Features.MediatR.Handlers.BlogHandlers;
 using UdemyCarBook.Application.Features.MediatR.Queries.BlogQueries;
 
 namespace Udemy.CarBook.WebApi.Controllers
@@ -54,5 +55,12 @@ namespace Udemy.CarBook.WebApi.Controllers
 			var values = await _mediator.Send(new GetLast3BlogsWithAuthorsQuery());
 			return Ok(values);
 		}
-	}
+
+        [HttpGet("GetAllBlogsWitAuthorsList")]
+        public async Task<IActionResult> GetAllBlogsWitAuthorsList()
+        {
+            var values = await _mediator.Send(new GetAllBlogsWithAuthorQuery());
+            return Ok(values);
+        }
+    }
 }
