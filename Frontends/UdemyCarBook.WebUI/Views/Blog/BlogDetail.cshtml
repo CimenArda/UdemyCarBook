@@ -19,8 +19,8 @@
 
                 @await Component.InvokeAsync("_BlogDetailRecentBlogComponentPartial")
 
-                @await Component.InvokeAsync("_BlogDetailTagCloudComponentPartial", new { id = ViewBag.blogid })
-
+                @await Component.InvokeAsync("_BlogDetailTagCloudComponentPartial", new {id=ViewBag.blogid })
+ 
                 @await Component.InvokeAsync("_BlogDetailParagraphComponentPartial")
             </div>
 

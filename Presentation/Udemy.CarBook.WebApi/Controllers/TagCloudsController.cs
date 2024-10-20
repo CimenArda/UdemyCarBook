@@ -52,7 +52,7 @@ namespace Udemy.CarBook.WebApi.Controllers
         [HttpGet("GetTagCloudByBlogId")]
         public async Task<IActionResult> GetTagCloudByBlogId(int id)
         {
-            var values = await _mediator.Send(new GetTagCloudByIdQuery(id));
+            var values = await _mediator.Send(new GetTagCloudByBlogIdQuery(id));
             return Ok(values);
         }
     }
