@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UdemyCarBook.Application.Features.MediatR.Commands.TagCloudCommands;
+using UdemyCarBook.Application.Features.MediatR.Queries.BlogQueries;
 using UdemyCarBook.Application.Features.MediatR.Queries.TagCloudQueries;
 
 namespace Udemy.CarBook.WebApi.Controllers
@@ -46,6 +47,13 @@ namespace Udemy.CarBook.WebApi.Controllers
         {
             await _mediator.Send(command);
             return Ok("TagCloud başarıyla güncellendi");
+        }
+
+        [HttpGet("GetTagCloudByBlogId")]
+        public async Task<IActionResult> GetTagCloudByBlogId(int id)
+        {
+            var values = await _mediator.Send(new GetTagCloudByIdQuery(id));
+            return Ok(values);
         }
     }
 }
