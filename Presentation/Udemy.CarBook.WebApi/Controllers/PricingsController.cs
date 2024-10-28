@@ -35,7 +35,7 @@ namespace Udemy.CarBook.WebApi.Controllers
             await _mediator.Send(command);
             return Ok("Pricing başarıyla eklendi");
         }
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<IActionResult> RemovePricing(int id)
         {
             await _mediator.Send(new RemovePricingCommand(id));

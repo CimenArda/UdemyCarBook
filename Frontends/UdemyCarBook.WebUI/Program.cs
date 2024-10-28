@@ -29,7 +29,7 @@ namespace UdemyCarBook.WebUI
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=AdminCar}/{action=Index}/{id?}");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

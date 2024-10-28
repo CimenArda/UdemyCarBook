@@ -35,7 +35,7 @@ namespace Udemy.CarBook.WebApi.Controllers
             await _mediator.Send(command);
             return Ok("Location başarıyla eklendi");
         }
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<IActionResult> RemoveLocation(int id)
         {
             await _mediator.Send(new RemoveLocationCommand(id));
