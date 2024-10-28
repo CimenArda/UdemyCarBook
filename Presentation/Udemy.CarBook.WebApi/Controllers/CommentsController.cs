@@ -53,7 +53,14 @@ namespace Udemy.CarBook.WebApi.Controllers
             return Ok("Yorum Başarıyla Güncellendi");
         }
 
-       
+        [HttpGet("GetCommentListByBlogId")]
+        public IActionResult GetCommentListByBlogId(int id)
+        {
+            var value = _commentRepository.GetCommentByBlogId(id);
+            return Ok(value);
+        }
+
+        
 
     }
 }
