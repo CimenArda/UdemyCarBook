@@ -8,7 +8,7 @@ using UdemyCarBook.Application.Features.MediatR.Results.StatisticsResults;
 
 namespace UdemyCarBook.Application.Features.Mediator.Queries.StatisticsQueries
 {
-    public class GetCarCountQuery : IRequest<GetCarCountQueryResult>
+    public class GetCarCountByKmSmallerThen1000Query:IRequest<GetCarCountByKmSmallerThen1000QueryResult>
     {
     }
 }

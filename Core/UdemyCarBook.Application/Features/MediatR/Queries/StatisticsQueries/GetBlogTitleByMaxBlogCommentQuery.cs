@@ -8,7 +8,7 @@ using UdemyCarBook.Application.Features.MediatR.Results.StatisticsResults;
 
 namespace UdemyCarBook.Application.Features.Mediator.Queries.StatisticsQueries
 {
-    public class GetCarCountQuery : IRequest<GetCarCountQueryResult>
+    public class GetBlogTitleByMaxBlogCommentQuery : IRequest<GetBlogTİtleByMaxBlogCommentQueryResult>
     {
     }
 }

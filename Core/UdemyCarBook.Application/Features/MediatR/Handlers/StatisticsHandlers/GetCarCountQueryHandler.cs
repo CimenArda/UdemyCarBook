@@ -4,27 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UdemyCarBook.Application.Features.MediatR.Queries.StatisticsQueries;
+using UdemyCarBook.Application.Features.Mediator.Queries.StatisticsQueries;
 using UdemyCarBook.Application.Features.MediatR.Results.StatisticsResults;
-using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
-using UdemyCarBook.Domain.Entities;
 
-namespace UdemyCarBook.Application.Features.MediatR.Handlers.StatisticsHandlers
+namespace UdemyCarBook.Application.Features.Mediator.Handlers.StatisticsHandlers
 {
     public class GetCarCountQueryHandler : IRequestHandler<GetCarCountQuery, GetCarCountQueryResult>
     {
+        private readonly ICarRepository _repository;
 
-        private readonly ICarRepository _carRepository;
-
-        public GetCarCountQueryHandler(ICarRepository carRepository)
+        public GetCarCountQueryHandler(ICarRepository repository)
         {
-            _carRepository = carRepository;
+            _repository = repository;
         }
 
         public async Task<GetCarCountQueryResult> Handle(GetCarCountQuery request, CancellationToken cancellationToken)
         {
-            var value = _carRepository.GetCarCount();
+            var value = _repository.GetCarCount();
             return new GetCarCountQueryResult
             {
                 CarCount = value,
