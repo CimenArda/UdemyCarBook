@@ -19,18 +19,18 @@ namespace Udemy.CarBook.WebApi.Controllers
         private readonly GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler;
         private readonly GetLast5CarsWithBrandQueryHandler _getLast5CarsWithBrandQueryHandler;
 
-		public CarsController(GetCarQueryHandler getCarQueryHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler)
-		{
-			_getCarQueryHandler = getCarQueryHandler;
-			_getCarByIdQueryHandler = getCarByIdQueryHandler;
-			_createCarCommandHandler = createCarCommandHandler;
-			_updateCarCommandHandler = updateCarCommandHandler;
-			_removeCarCommandHandler = removeCarCommandHandler;
-			_getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
-			_getLast5CarsWithBrandQueryHandler = getLast5CarsWithBrandQueryHandler;
-		}
+        public CarsController(GetCarQueryHandler getCarQueryHandler, GetCarByIdQueryHandler getCarByIdQueryHandler, CreateCarCommandHandler createCarCommandHandler, UpdateCarCommandHandler updateCarCommandHandler, RemoveCarCommandHandler removeCarCommandHandler, GetCarWithBrandQueryHandler getCarWithBrandQueryHandler, GetLast5CarsWithBrandQueryHandler getLast5CarsWithBrandQueryHandler)
+        {
+            _getCarQueryHandler = getCarQueryHandler;
+            _getCarByIdQueryHandler = getCarByIdQueryHandler;
+            _createCarCommandHandler = createCarCommandHandler;
+            _updateCarCommandHandler = updateCarCommandHandler;
+            _removeCarCommandHandler = removeCarCommandHandler;
+            _getCarWithBrandQueryHandler = getCarWithBrandQueryHandler;
+            _getLast5CarsWithBrandQueryHandler = getLast5CarsWithBrandQueryHandler;
+        }
 
-		[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> CarList()
         {
             var values = await _getCarQueryHandler.Handle();
@@ -79,5 +79,5 @@ namespace Udemy.CarBook.WebApi.Controllers
             return Ok(values);
         }
 
-	}
+    }
 }
