@@ -108,7 +108,8 @@ namespace Udemy.CarBook.Persistance.Repositories.StatisticsRepositories
 
         public int GetCarCountByKmSmallerThen1000()
         {
-            throw new NotImplementedException();
+            var value = _context.Cars.Where(x => x.Km <= 1000).Count();
+            return value;
         }
 
         public int GetCarCountByTransmissionIsAuto()

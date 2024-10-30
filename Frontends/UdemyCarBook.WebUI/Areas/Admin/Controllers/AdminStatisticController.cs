@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using UdemyCarBook.Dto.AuthorDtos;
+using UdemyCarBook.Dto.StatisticsDtos;
 
 namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
 {
@@ -6,10 +9,163 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
     [Route("Admin/AdminStatistics")]
     public class AdminStatisticController : Controller
     {
-        [Route("Index")]
-        public IActionResult Index()
+        private readonly IHttpClientFactory _httpClientFactory;
+        public AdminStatisticController(IHttpClientFactory httpClientFactory)
         {
+            _httpClientFactory = httpClientFactory;
+        }
+
+        [Route("Index")]
+        public async Task<IActionResult> Index()
+        {
+            Random random = new Random();
+          
+            var client = _httpClientFactory.CreateClient();
+
+
+            var responseMessage = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarCount");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData);
+                int v1 = random.Next(0, 101);
+                ViewBag.v1 = v1;
+                ViewBag.carcount = values.carCount;
+            }
+
+            var responseMessage2 = await client.GetAsync("https://localhost:7005/api/Statistics/GetLocationCount");
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                int locationCountRandom = random.Next(0, 101);
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                var values2 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData2);
+                ViewBag.locationcount = values2.locationCount;
+                ViewBag.locationCountRandom = locationCountRandom;
+            }
+
+            var responseMessage3 = await client.GetAsync("https://localhost:7005/api/Statistics/GetAuthorCount");
+            if (responseMessage3.IsSuccessStatusCode)
+            {
+                int authorCountRandom = random.Next(0, 101);
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                var values3 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData3);
+                ViewBag.authorcount = values3.authorCount;
+
+                ViewBag.authorcountrandom = authorCountRandom;
+            }
+
+            var responseMessage4 = await client.GetAsync("https://localhost:7005/api/Statistics/GetBlogCount");
+            if (responseMessage4.IsSuccessStatusCode)
+            {
+                int blogCountRandom = random.Next(0, 101);
+
+                var jsonData4 = await responseMessage4.Content.ReadAsStringAsync();
+                var values4 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData4);
+                ViewBag.blogCount = values4.blogCount;
+
+                ViewBag.blogCountRandom = blogCountRandom;
+            }
+
+            var responseMessage5 = await client.GetAsync("https://localhost:7005/api/Statistics/GetBrandCount");
+            if (responseMessage5.IsSuccessStatusCode)
+            {
+                int brandCountRandom = random.Next(0, 101);
+                var jsonData5 = await responseMessage5.Content.ReadAsStringAsync();
+                var values5 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData5);
+                ViewBag.brandCount = values5.brandCount;
+
+                ViewBag.brandCountRandom = brandCountRandom;
+            }
+
+            var responseMessage6 = await client.GetAsync("https://localhost:7005/api/Statistics/GetAvgRentPriceForDaily");
+            if (responseMessage6.IsSuccessStatusCode)
+            {
+                int avgRentPriceForDailyRandom = random.Next(0, 101);
+                var jsonData6 = await responseMessage6.Content.ReadAsStringAsync();
+                var values6 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData6);
+                ViewBag.avgRentPriceForDaily = values6.avgPriceForDaily.ToString("0.00"); ;
+                ViewBag.avgRentPriceForDailyRandom = avgRentPriceForDailyRandom;
+            }
+
+            var responseMessage7 = await client.GetAsync("https://localhost:7005/api/Statistics/GetAvgRentPriceForWeekly");
+            if (responseMessage7.IsSuccessStatusCode)
+            {
+                int avgRentPriceForWeeklyRandom = random.Next(0, 101);
+                var jsonData7 = await responseMessage7.Content.ReadAsStringAsync();
+                var values7 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData7);
+                ViewBag.avgRentPriceForWeekly = values7.getAvgPriceForWeekly.ToString("0.00");
+                ViewBag.avgRentPriceForWeeklyRandom = avgRentPriceForWeeklyRandom;
+            }
+
+
+            var responseMessage8 = await client.GetAsync("https://localhost:7005/api/Statistics/GetAvgRentPriceForMonthly");
+            if (responseMessage8.IsSuccessStatusCode)
+            {
+                int avgRentPriceForMonthlyRandom = random.Next(0, 101);
+                var jsonData8 = await responseMessage8.Content.ReadAsStringAsync();
+                var values8 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData8);
+                ViewBag.avgRentPriceForMonthly = values8.getAvgPriceForMonthly.ToString("0.00");
+                ViewBag.avgRentPriceForMonthlyRandom = avgRentPriceForMonthlyRandom;
+            }
+
+            var responseMessage9 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarCountByTranmissionIsAuto");
+            if (responseMessage9.IsSuccessStatusCode)
+            {
+                int carCountByTranmissionIsAutoRandom = random.Next(0, 101);
+                var jsonData9 = await responseMessage9.Content.ReadAsStringAsync();
+                var values9 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData9);
+                ViewBag.carCountByTranmissionIsAuto = values9.getCarCountByTransmissionIsAuto;
+                ViewBag.carCountByTranmissionIsAutoRandom = carCountByTranmissionIsAutoRandom;
+            }
+
+
+
+
+
+
+
+
+
+            var responseMessage12 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarCountByKmSmallerThen1000");
+            if (responseMessage12.IsSuccessStatusCode)
+            {
+                int carCountByKmSmallerThen1000Random = random.Next(0, 101);
+                var jsonData12 = await responseMessage12.Content.ReadAsStringAsync();
+                var values12 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData12);
+                ViewBag.carCountByKmSmallerThen1000 = values12.GetCarCountByKmSmallerThen1000;
+                ViewBag.carCountByKmSmallerThen1000Random = carCountByKmSmallerThen1000Random;
+            }
+
+            var responseMessage13 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarCountByFuelGasolineOrDiesel");
+            if (responseMessage13.IsSuccessStatusCode)
+            {
+                int carCountByFuelGasolineOrDieselRandom = random.Next(0, 101);
+                var jsonData13 = await responseMessage13.Content.ReadAsStringAsync();
+                var values13 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData13);
+                ViewBag.carCountByFuelGasolineOrDiesel = values13.GetCarCountByFuelGasolineOrDisel;
+                ViewBag.carCountByFuelGasolineOrDieselRandom = carCountByFuelGasolineOrDieselRandom;
+            }
+
+            var responseMessage14 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarCountByFuelElectric");
+            if (responseMessage14.IsSuccessStatusCode)
+            {
+                int carCountByFuelElectricRandom = random.Next(0, 101);
+                var jsonData14 = await responseMessage14.Content.ReadAsStringAsync();
+                var values14 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData14);
+                ViewBag.carCountByFuelElectric = values14.GetCarCountByElectric;
+                ViewBag.carCountByFuelElectricRandom = carCountByFuelElectricRandom;
+            }
+
+
+
+
+
+
+
+
             return View();
+
         }
     }
 }
