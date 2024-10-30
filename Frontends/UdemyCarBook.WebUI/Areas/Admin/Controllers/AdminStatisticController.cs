@@ -157,9 +157,25 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
                 ViewBag.carCountByFuelElectricRandom = carCountByFuelElectricRandom;
             }
 
+            var responseMessage15 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarBrandAndModelByRentPriceDailyMax");
+            if (responseMessage15.IsSuccessStatusCode)
+            {
+                int carBrandAndModelByRentPriceDailyMaxRandom = random.Next(0, 101);
+                var jsonData15 = await responseMessage15.Content.ReadAsStringAsync();
+                var values15 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData15);
+                ViewBag.carBrandAndModelByRentPriceDailyMax = values15.GetCarBrandAndModelByRentPriceDailyMax;
+                ViewBag.carBrandAndModelByRentPriceDailyMaxRandom = carBrandAndModelByRentPriceDailyMaxRandom;
+            }
 
-
-
+            var responseMessage16 = await client.GetAsync("https://localhost:7005/api/Statistics/GetCarBrandAndModelByRentPriceDailyMin");
+            if (responseMessage16.IsSuccessStatusCode)
+            {
+                int carBrandAndModelByRentPriceDailyMinRandom = random.Next(0, 101);
+                var jsonData16 = await responseMessage16.Content.ReadAsStringAsync();
+                var values16 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData16);
+                ViewBag.carBrandAndModelByRentPriceDailyMin = values16.GetCarBrandAndModelByRentPriceDailyMin;
+                ViewBag.carBrandAndModelByRentPriceDailyMinRandom = carBrandAndModelByRentPriceDailyMinRandom;
+            }
 
 
 
