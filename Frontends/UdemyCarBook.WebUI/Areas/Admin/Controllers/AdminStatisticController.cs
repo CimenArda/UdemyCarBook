@@ -119,10 +119,26 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
                 ViewBag.carCountByTranmissionIsAutoRandom = carCountByTranmissionIsAutoRandom;
             }
 
+            var responseMessage10 = await client.GetAsync("https://localhost:7005/api/Statistics/GetBrandNameByMaxCar");
+            if (responseMessage10.IsSuccessStatusCode)
+            {
+                int brandNameByMaxCarRandom = random.Next(0, 101);
+                var jsonData10 = await responseMessage10.Content.ReadAsStringAsync();
+                var values10 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData10);
+                ViewBag.brandNameByMaxCar = values10.GetBrandNameByMaxCar;
+                ViewBag.brandNameByMaxCarRandom = brandNameByMaxCarRandom;
+            }
 
 
-
-
+            var responseMessage11 = await client.GetAsync("https://localhost:7005/api/Statistics/GetBlogTitleByMaxBlogComment");
+            if (responseMessage11.IsSuccessStatusCode)
+            {
+                int blogTitleByMaxBlogCommentRandom = random.Next(0, 101);
+                var jsonData11 = await responseMessage11.Content.ReadAsStringAsync();
+                var values11 = JsonConvert.DeserializeObject<ResultStatisticsDto>(jsonData11);
+                ViewBag.blogTitleByMaxBlogComment = values11.GetBlogTİtleByMaxBlogComment;
+                ViewBag.blogTitleByMaxBlogCommentRandom = blogTitleByMaxBlogCommentRandom;
+            }
 
 
 

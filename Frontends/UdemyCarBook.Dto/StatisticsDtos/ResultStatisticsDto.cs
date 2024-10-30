@@ -22,7 +22,7 @@ namespace UdemyCarBook.Dto.StatisticsDtos
         public int GetCarCountByElectric { get; set; }
         public string GetCarBrandAndModelByRentPriceDailyMax { get; set; }
         public string GetCarBrandAndModelByRentPriceDailyMin { get; set; }
-        public string brandNameByMaxCar { get; set; }
-        public string blogTitleByMaxBlogComment { get; set; }
+        public string GetBrandNameByMaxCar { get; set; }
+        public string GetBlogTİtleByMaxBlogComment { get; set; }
     }
 }

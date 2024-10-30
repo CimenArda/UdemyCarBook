@@ -20,12 +20,28 @@ namespace Udemy.CarBook.Persistance.Repositories.StatisticsRepositories
 
         public string GetBlogTitleByMaxBlogComment()
         {
-            throw new NotImplementedException();
+            //Select Top(1) BlogId,Count(*) as 'Sayi' From Comments Group By BlogID Order By Sayi Desc 
+            var values = _context.Comments.GroupBy(x => x.BlogId).
+                              Select(y => new
+                              {
+                                  BlogID = y.Key,
+                                  Count = y.Count()
+                              }).OrderByDescending(z => z.Count).Take(1).FirstOrDefault();
+            string blogName = _context.Blogs.Where(x => x.BlogId == values.BlogID).Select(y => y.Title).FirstOrDefault();
+            return blogName;
         }
 
         public string GetBrandNameByMaxCar()
         {
-            throw new NotImplementedException();
+            //*********//
+            var values = _context.Cars.GroupBy(x => x.BrandID).
+                             Select(y => new
+                             {
+                                 BrandID = y.Key,
+                                 Count = y.Count()
+                             }).OrderByDescending(z => z.Count).Take(1).FirstOrDefault();
+            string brandName = _context.Brands.Where(x => x.BrandID == values.BrandID).Select(y => y.Name).FirstOrDefault();
+            return brandName;
         }
 
         public int GetAuthorCount()
