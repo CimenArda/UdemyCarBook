@@ -60,7 +60,13 @@ namespace Udemy.CarBook.WebApi.Controllers
             return Ok(value);
         }
 
-        
+        [HttpGet("CommentCountByBlog")]
+        public IActionResult CommentCountByBlog(int id)
+        {
+            var value = _commentRepository.GetCountCommentByBlog(id);
+            return Ok(value);
+        }
+
 
     }
 }
