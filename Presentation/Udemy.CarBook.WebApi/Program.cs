@@ -16,6 +16,7 @@ using UdemyCarBook.Application.Features.CQRS.Handlers.ContactHandlers;
 using UdemyCarBook.Application.Features.RepositoryPattern;
 using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Application.Interfaces.BlogInterfaces;
+using UdemyCarBook.Application.Interfaces.CarDescriptionInterfaces;
 using UdemyCarBook.Application.Interfaces.CarFeatureInterfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
 using UdemyCarBook.Application.Interfaces.CarPricingInterfaces;
@@ -23,6 +24,7 @@ using UdemyCarBook.Application.Interfaces.RentACarInterfaces;
 using UdemyCarBook.Application.Interfaces.StatisticsInterfaces;
 using UdemyCarBook.Application.Interfaces.TagCloudInterfaces;
 using UdemyCarBook.Application.Services;
+using UdemyCarBook.Persistence.Repositories.CarDescriptionRepositories;
 using UdemyCarBook.Persistence.Repositories.CarFeatureRepositories;
 
 namespace Udemy.CarBook.WebApi
@@ -43,6 +45,7 @@ namespace Udemy.CarBook.WebApi
             builder.Services.AddScoped(typeof(IStatisticsRepository), typeof(StatisticsRepository));
             builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
             builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
+            builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 
 
