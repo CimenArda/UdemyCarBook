@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using System.Reflection;
 using Udemy.CarBook.Persistance.Context;
 using Udemy.CarBook.Persistance.Repositories;
 using Udemy.CarBook.Persistance.Repositories.BlogRepositories;
@@ -21,11 +23,13 @@ using UdemyCarBook.Application.Interfaces.CarFeatureInterfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
 using UdemyCarBook.Application.Interfaces.CarPricingInterfaces;
 using UdemyCarBook.Application.Interfaces.RentACarInterfaces;
+using UdemyCarBook.Application.Interfaces.ReviewInterfaces;
 using UdemyCarBook.Application.Interfaces.StatisticsInterfaces;
 using UdemyCarBook.Application.Interfaces.TagCloudInterfaces;
 using UdemyCarBook.Application.Services;
 using UdemyCarBook.Persistence.Repositories.CarDescriptionRepositories;
 using UdemyCarBook.Persistence.Repositories.CarFeatureRepositories;
+using UdemyCarBook.Persistence.Repositories.ReviewRepositories;
 
 namespace Udemy.CarBook.WebApi
 {
@@ -46,6 +50,7 @@ namespace Udemy.CarBook.WebApi
             builder.Services.AddScoped(typeof(IRentACarRepository), typeof(RentACarRepository));
             builder.Services.AddScoped(typeof(ICarFeatureRepository), typeof(CarFeatureRepository));
             builder.Services.AddScoped(typeof(ICarDescriptionRepository), typeof(CarDescriptionRepository));
+            builder.Services.AddScoped(typeof(IReviewRepository), typeof(ReviewRepository));
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(CommentRepository<>));
 
 
@@ -96,6 +101,10 @@ namespace Udemy.CarBook.WebApi
 
             builder.Services.AddApplicationSerive(builder.Configuration);
 
+            builder.Services.AddControllers().AddFluentValidation(x =>
+            {
+                x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
