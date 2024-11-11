@@ -15,8 +15,10 @@ namespace Udemy.CarBook.Persistance.Context
         {
             optionsBuilder.UseSqlServer("Server=ARDACIMEN\\SQLEXPRESS;Initial Catalog=UdemyCarBook;Integrated Security =true; TrustServerCertificate=true;");
         }
+		public DbSet<AppUser> AppUsers { get; set; }
+		public DbSet<AppRole> AppRoles { get; set; }
 
-        public DbSet<About> abouts { get; set; }
+		public DbSet<About> abouts { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
