@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 namespace UdemyCarBook.WebUI
 {
     public class Program
@@ -7,6 +9,18 @@ namespace UdemyCarBook.WebUI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddHttpClient();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme,
+                
+                opt =>{
+                          opt.LoginPath = "/Login/Index";
+                          opt.LogoutPath = "/Default/Index";
+                          opt.AccessDeniedPath = "/Default/Index";
+                          opt.Cookie.SameSite = SameSiteMode.Strict;
+                          opt.Cookie.HttpOnly = true;
+                          opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                          opt.Cookie.Name = "CarBookJwt";
+                      }
+                );
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -24,7 +38,7 @@ namespace UdemyCarBook.WebUI
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
