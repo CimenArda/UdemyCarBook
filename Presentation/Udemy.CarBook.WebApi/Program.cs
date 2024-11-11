@@ -34,6 +34,7 @@ using UdemyCarBook.Application.Tools;
 using UdemyCarBook.Persistence.Repositories.CarDescriptionRepositories;
 using UdemyCarBook.Persistence.Repositories.CarFeatureRepositories;
 using UdemyCarBook.Persistence.Repositories.ReviewRepositories;
+using UdemyCarBook.WebApi.Hubs;
 
 namespace Udemy.CarBook.WebApi
 {
@@ -42,6 +43,19 @@ namespace Udemy.CarBook.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddHttpClient();
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowCredentials();
+                });
+            });
+            builder.Services.AddSignalR();
 
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
@@ -140,14 +154,14 @@ namespace Udemy.CarBook.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
 
 
             app.MapControllers();
-
+            app.MapHub<CarHub>("/carhub");
             app.Run();
         }
     }
